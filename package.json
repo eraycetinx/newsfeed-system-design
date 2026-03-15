@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.ts",
+    "start:mock": "tsx mock/generateMockData.ts",
+    "start": "tsx watch index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -14,9 +15,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/eraycetinx/newsfeed-system-design/issues"
   },
-  "homepage": "https://github.com/eraycetinx/newsfeed-system-design#readme"
+  "homepage": "https://github.com/eraycetinx/newsfeed-system-design#readme",
+  "devDependencies": {
+    "@faker-js/faker": "^10.3.0",
+    "@types/node": "^25.5.0",
+    "nodemon": "^3.1.14",
+    "tsx": "^4.21.0"
+  }
 }

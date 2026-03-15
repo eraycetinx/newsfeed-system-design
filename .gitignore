@@ -1,0 +1,6 @@
+# Ignore these
+/node_modules/
+/mock/data.json
+
+# Do not ignore these
+!.gitignore
