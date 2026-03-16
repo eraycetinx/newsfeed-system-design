@@ -4,5 +4,8 @@ export interface MockData {
   content: string;
   score: number;
   type: PostType;
+  likeCount: number;
+  commentCount: number;
+  savedCount: number
   createdAt: Date;
 }

@@ -17,10 +17,13 @@ export async function generateMockData(
 
     data.push({
       content: faker.lorem.text(),
-      createdAt: faker.date.recent(),
+      createdAt: faker.date.anytime(),
       score: 0,
       uuid: faker.string.uuid(),
       type: getRandomType,
+      likeCount: Math.floor(Math.random() * 200),
+      commentCount: Math.floor(Math.random() * 200),
+      savedCount: Math.floor(Math.random() * 200),
     });
   }
 
