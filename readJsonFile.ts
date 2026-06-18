@@ -2,6 +2,11 @@ import { PathLike } from "fs";
 import fs from "fs/promises";
 import { MockData } from "./types/MockData";
 
+/**
+ * 
+ * @param filePath - path of json file
+ * @returns Array MockData
+ */
 export async function readJsonFile(filePath: PathLike | fs.FileHandle): Promise<Array<MockData>> {
   let file: string;
   try {

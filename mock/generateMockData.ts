@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { MockData, PostType } from "../types/MockData.js";
+import { MockData, } from "../types/MockData.js";
 import fs from "fs/promises";
 
 const MAX_CREATE_DATA_COUNT: number = 100;
@@ -9,23 +9,7 @@ export async function generateMockData(
 ): Promise<Array<MockData>> {
   const data: Array<MockData> = [];
 
-  const typeOfPosts: PostType[] = ["Daily", "Humor", "News"];
-
-  for (let i = 0; i < counter; i++) {
-    const getRandomType: PostType =
-      typeOfPosts[Math.floor(Math.random() * typeOfPosts.length)];
-
-    data.push({
-      content: faker.lorem.text(),
-      createdAt: faker.date.anytime(),
-      score: 0,
-      uuid: faker.string.uuid(),
-      type: getRandomType,
-      likeCount: Math.floor(Math.random() * 200),
-      commentCount: Math.floor(Math.random() * 200),
-      savedCount: Math.floor(Math.random() * 200),
-    });
-  }
+  
 
   return data;
 }
