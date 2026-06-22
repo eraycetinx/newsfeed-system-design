@@ -1,51 +1,59 @@
-import { faker } from "@faker-js/faker";
-import { MockData, } from "../types/MockData.js";
+import {
+  Comment,
+  Follow,
+  Like,
+  Post,
+  User,
+  DataType,
+} from "../types/MockData.js";
 import fs from "fs/promises";
+import {
+  generateCommentData,
+  generateFollowData,
+  generateLikeData,
+  generatePostData,
+  generateUserData,
+} from "./generator.js";
 
-const MAX_CREATE_DATA_COUNT: number = 100;
+export async function generateMockData(): Promise<DataType> {
 
-export async function generateMockData(
-  counter: number,
-): Promise<Array<MockData>> {
-  const data: Array<MockData> = [];
+  const userData: User[] = [];
+  const postData: Post[] = [];
+  const likeData: Like[] = [];
+  const followData: Follow[] = [];
+  const commentData: Comment[] = [];
 
-  
+  // Burada datalar uretilir
+  // await olmasinin sebebi bir alttaki bir ustteki ile alakali
+  // post olmasi icin user lazim, comment icin user ve post lazim
 
-  return data;
-}
+  // generateUserData()    -> user olusturur
+  // generatePostData()    -> post olusturur
+  // generateLikeData()    -> like olusturur
+  // generateCommentData() -> comment olusturur
+  // generateFollowData()  -> follow olusturur
+  await generateUserData(userData);
+  await generatePostData(postData, userData);
+  await Promise.all([
+    generateLikeData(postData, userData, likeData),
+    generateCommentData(postData, userData, commentData),
+  ])
+  await generateFollowData(userData, followData);
 
-// Check user pass the counter parameter
-if (process.argv[2] === undefined) {
-  throw new Error("You must pass 'counter' parameter as a second parameter.");
-}
+  return { userData, postData, commentData, likeData, followData };
 
-const intRegex = /^\d+$/;
-const arg = process.argv[2];
-
-// check params is a number
-if (!intRegex.test(arg)) {
-  console.error("The counter parameter must be number");
-  process.exit(1);
-}
-
-const counter = Number(arg);
-
-// Check the counter, if exceeds MAX_CREATE_DATA_COUNT, it will display an error in the console.
-if (counter > MAX_CREATE_DATA_COUNT) {
-  console.error("Too much data try less than 100");
-  process.exit(1);
 }
 
 async function run() {
   try {
-    // genereate a data and write to json file
-    const data = await generateMockData(counter);
+    // generate a data and write to json file
+    const data = await generateMockData();
     const converToJSON = JSON.stringify(data);
-    await fs.writeFile("./mock/data.json", converToJSON);
+    await fs.writeFile("./data.json", converToJSON);
     console.log("Data was written to the 'mock/data.json' file");
   } catch (e) {
     if (e) {
-      console.error("Something went wrong while writing to file");
+      console.error(e);
       process.exit(1);
     }
   }
