@@ -5,7 +5,7 @@ import {
   Post,
   User,
   DataType,
-} from "../types/MockData.js";
+} from "../types/MockData";
 import fs from "fs/promises";
 import {
   generateCommentData,
@@ -13,7 +13,7 @@ import {
   generateLikeData,
   generatePostData,
   generateUserData,
-} from "./generator.js";
+} from "./generator";
 
 export async function generateMockData(): Promise<DataType> {
 
@@ -49,7 +49,7 @@ async function run() {
     // generate a data and write to json file
     const data = await generateMockData();
     const converToJSON = JSON.stringify(data);
-    await fs.writeFile("./data.json", converToJSON);
+    await fs.writeFile("./mock/data.json", converToJSON);
     console.log("Data was written to the 'mock/data.json' file");
   } catch (e) {
     if (e) {

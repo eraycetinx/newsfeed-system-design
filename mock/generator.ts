@@ -27,8 +27,8 @@ export async function generatePostData(
     postData[i] = {
       uuid: crypto.randomUUID(),
       userUuid: userData[Math.floor(Math.random() * 29)].uuid,
-      commentCount: 0,
-      likeCount: 0,
+      commentCount: Math.floor(Math.random()*1001), // comment count between 1-1000
+      likeCount: Math.floor(Math.random()*1001), // like count between 1-1000
       score: 0,
       createdAt: randomDate(new Date(2020, 0, 1), new Date()),
     };
